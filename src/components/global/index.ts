@@ -8,3 +8,5 @@ export { default as CartButton } from "./CartButton";
 export { default as ModeToggle } from "./ModeToggle";
 export { default as ErrorElement } from "./ErrorElement";
 export { default as SectionTitle } from "./SectionTitle";
+export { default as Loading } from "./Loading";
+export { default as FormInput } from "./FormInput";
