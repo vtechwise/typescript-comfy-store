@@ -20,7 +20,7 @@ function FormSelect({ label, name, defaultValue, options }: selectProps) {
       <Label className="capitalize " htmlFor={name}>
         {label}
       </Label>
-      <Select defaultValue={defaultValue || options[0]}>
+      <Select defaultValue={defaultValue || options[0]} name={name}>
         <SelectTrigger id={name}>
           <SelectValue />
         </SelectTrigger>
