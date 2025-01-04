@@ -4,6 +4,7 @@ import { Separator } from "@/components/ui/separator";
 import { customFetch, formatAsDollars, SingleProductResponse } from "@/utils";
 import { useState } from "react";
 import { Link, type LoaderFunction, useLoaderData } from "react-router-dom";
+import { Mode } from "@/components/products/SelectProductAmount";
 
 export const loader: LoaderFunction = async ({
   params,
@@ -59,7 +60,11 @@ const SingleProduct = () => {
             productColor={productColor}
             setProductColor={setProductColor}
           />
-          <SelectProductAmount />
+          <SelectProductAmount
+            mode={Mode.SingleProduct}
+            amount={amount}
+            setAmount={setAmount}
+          />
           <Button size={"lg"} className="mt-10" onClick={addToCart}>
             Add to Bag
           </Button>
