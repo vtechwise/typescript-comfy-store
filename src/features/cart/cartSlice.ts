@@ -33,7 +33,19 @@ const cartSlice = createSlice({
       state.cartTotal += Number(newCartItem.price) * newCartItem.amount;
       cartSlice.caseReducers.cacluatteTotals(state);
     },
-    removeItem: () => {},
+    removeItem: (state, action: PayloadAction<string>) => {
+      const cartID = action.payload;
+
+      const cartItem = state.cartItems.find((item) => item.cartID === cartID);
+      if (!cartItem) return;
+      state.cartItems = state.cartItems.filter((item) => {
+        return item.cartID !== cartID;
+      });
+      state.numItemsInCart -= cartItem.amount;
+      state.cartTotal -= Number(cartItem.price) * cartItem.amount;
+      cartSlice.caseReducers.cacluatteTotals(state);
+      toast({ description: "Item removed from the cart" });
+    },
     clearCart: () => {
       localStorage.setItem("cart", JSON.stringify(defaultState));
       return defaultState;
