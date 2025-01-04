@@ -34,7 +34,10 @@ const cartSlice = createSlice({
       cartSlice.caseReducers.cacluatteTotals(state);
     },
     removeItem: () => {},
-    clearCart: () => {},
+    clearCart: () => {
+      localStorage.setItem("cart", JSON.stringify(defaultState));
+      return defaultState;
+    },
     editItem: () => {},
     cacluatteTotals: (state) => {
       state.tax = 0.1 * state.cartTotal;
