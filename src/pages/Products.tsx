@@ -2,7 +2,6 @@ import {
   Filters,
   PaginationContainer,
   ProductContainer,
-  ProductsList,
 } from "@/components/products";
 import {
   customFetch,
