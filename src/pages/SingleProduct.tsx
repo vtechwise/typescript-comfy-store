@@ -1,10 +1,17 @@
 import { SelectProductAmount, SelectProductColor } from "@/components/products";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { customFetch, formatAsDollars, SingleProductResponse } from "@/utils";
+import {
+  CartItem,
+  customFetch,
+  formatAsDollars,
+  SingleProductResponse,
+} from "@/utils";
 import { useState } from "react";
 import { Link, type LoaderFunction, useLoaderData } from "react-router-dom";
 import { Mode } from "@/components/products/SelectProductAmount";
+import { useAppDispatch } from "@/hooks";
+import { addItem } from "@/features/cart/cartSlice";
 
 export const loader: LoaderFunction = async ({
   params,
@@ -18,13 +25,27 @@ export const loader: LoaderFunction = async ({
 
 const SingleProduct = () => {
   const { data: product } = useLoaderData() as SingleProductResponse;
+  const dispatch = useAppDispatch();
   const { title, image, description, colors, company, price } =
     product.attributes;
   const dollarAmount = formatAsDollars(price);
   const [productColor, setProductColor] = useState(colors[0]);
   const [amount, setAmount] = useState<number>(1);
 
-  const addToCart = () => {};
+  const cartItem: CartItem = {
+    cartID: productColor + product.id,
+    price,
+    image,
+    amount,
+    company,
+    productColor,
+    title,
+    productID: product.id,
+  };
+
+  const addToCart = () => {
+    dispatch(addItem(cartItem));
+  };
 
   return (
     <section>
