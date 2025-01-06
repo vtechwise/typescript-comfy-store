@@ -1,3 +1,10 @@
+import { formatAsDollars } from "@/utils";
+import { Button } from "../ui/button";
+import { useAppDispatch } from "@/hooks";
+import { editItem, removeItem } from "@/features/cart/cartSlice";
+import { SelectProductAmount } from "../products";
+import { Mode } from "../products/SelectProductAmount";
+
 export const FirstColumn = ({
   image,
   title,
@@ -42,16 +49,35 @@ export const SecondColumn = ({
   );
 };
 
-export const ThirdtColumn = ({
+export const ThirdColumn = ({
   amount,
   cartID,
 }: {
   amount: number;
   cartID: string;
 }) => {
-  return <div>first column</div>;
+  const dispatch = useAppDispatch();
+  const setAmount = (value: number) => {
+    dispatch(editItem({ cartID, amount: value }));
+  };
+
+  const removeItemFromCart = () => {
+    dispatch(removeItem(cartID));
+  };
+  return (
+    <div>
+      <SelectProductAmount
+        mode={Mode.CartItem}
+        setAmount={setAmount}
+        amount={amount}
+      />
+      <Button className="-ml-4" variant={"link"} onClick={removeItemFromCart}>
+        remove
+      </Button>
+    </div>
+  );
 };
 
 export const FOurthColumn = ({ price }: { price: string }) => {
-  return <div>first column</div>;
+  return <p className="font-medium sm:ml-auto">{formatAsDollars(price)}</p>;
 };
