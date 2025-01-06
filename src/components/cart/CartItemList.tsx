@@ -4,7 +4,7 @@ import {
   FirstColumn,
   FOurthColumn,
   SecondColumn,
-  ThirdtColumn,
+  ThirdColumn,
 } from "./CartColumns";
 
 const CartItemList = () => {
@@ -25,7 +25,7 @@ const CartItemList = () => {
               company={company}
               productColor={productColor}
             />
-            <ThirdtColumn amount={amount} cartID={cartID} />
+            <ThirdColumn amount={amount} cartID={cartID} />
             <FOurthColumn price={price} />
           </Card>
         );

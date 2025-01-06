@@ -20,7 +20,7 @@ type SelectProductAmoutnProps = {
 type SelectCartItemAmountsProps = {
   mode: Mode.CartItem;
   amount: number;
-  setAmount: () => void;
+  setAmount: (value: number) => void;
 };
 
 const SelectProductAmount = ({
