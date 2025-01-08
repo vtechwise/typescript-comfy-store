@@ -1,4 +1,4 @@
-import { FormInput } from "@/components/global";
+import { FormInput, SubmitBtn } from "@/components/global";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "@/hooks/use-toast";
@@ -40,9 +40,7 @@ const Register = () => {
             <FormInput type="text" name="username" />
             <FormInput type="email" name="email" />
             <FormInput type="password" name="password" />
-            <Button type="submit" className="w-full mt-4">
-              submit
-            </Button>
+            <SubmitBtn text="Register" className="w-full mt-4" />
           </Form>
 
           <p className="text-center mt-4">
