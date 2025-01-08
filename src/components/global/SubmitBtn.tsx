@@ -13,7 +13,7 @@ const SubmitBtn = ({ text, className }: SubmitBtnProps) => {
   return (
     <Button type="submit" className={className} disabled={isSubmitting}>
       {isSubmitting ? (
-        <span>
+        <span className="flex items-center">
           {" "}
           <ReloadIcon className="h-4 w-4 animate-spin mr-2" /> submitting...{" "}
         </span>
