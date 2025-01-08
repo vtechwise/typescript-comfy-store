@@ -1,6 +1,7 @@
 import { toast } from "@/hooks/use-toast";
 import { Description } from "@radix-ui/react-toast";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { log } from "console";
 
 type User = {
   username: string;
@@ -13,6 +14,8 @@ type UserState = {
 
 const getUserFromLocalStorage = (): User | null => {
   const user = localStorage.getItem("user");
+  console.log(user);
+
   return user ? JSON.parse(user) : null;
 };
 
@@ -26,6 +29,7 @@ const userSlice = createSlice({
     loginUser: (state, action: PayloadAction<User>) => {
       const user = action.payload;
       state.user = user;
+
       localStorage.setItem("user", JSON.stringify(user));
       if (user.username === "demo user") {
         toast({ description: "welocme guest user" });

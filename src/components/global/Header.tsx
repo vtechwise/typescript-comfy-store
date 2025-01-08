@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { Button } from "../ui/button";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { clearCart } from "@/features/cart/cartSlice";
 import { logoutUser } from "@/features/user/userSlice";
