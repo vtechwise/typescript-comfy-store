@@ -4,9 +4,38 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { loginUser } from "@/features/user/userSlice";
 import { useAppDispatch } from "@/hooks";
 import { toast } from "@/hooks/use-toast";
+import { ReduxStore } from "@/store";
 import { customFetch } from "@/utils";
 import { AxiosResponse } from "axios";
-import { Form, Link, useNavigate } from "react-router-dom";
+import {
+  ActionFunction,
+  Form,
+  Link,
+  redirect,
+  useNavigate,
+} from "react-router-dom";
+
+export const action = (store: ReduxStore): ActionFunction => {
+  return async ({ request }): Promise<null | Response> => {
+    const formData = await request.formData();
+    const data = Object.fromEntries(formData);
+    try {
+      const response: AxiosResponse = await customFetch.post(
+        "/auth/local",
+        data
+      );
+      const username = response.data.user.username;
+      const jwt = response.data.jwt;
+      store.dispatch(loginUser({ username, jwt }));
+      toast({ description: "login successful" });
+      return redirect("/");
+    } catch (error) {
+      console.log(error);
+      toast({ description: "Login failed" });
+      return null;
+    }
+  };
+};
 
 const Login = () => {
   const dispatch = useAppDispatch();
