@@ -5,7 +5,7 @@ import { useAppSelector } from "@/hooks";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
-  const user = null;
+  const user = useAppSelector((state) => state.userState.user);
 
   const { numItemsInCart } = useAppSelector((state) => state.cartState);
 
