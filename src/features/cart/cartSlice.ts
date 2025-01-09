@@ -62,13 +62,14 @@ const cartSlice = createSlice({
       if (!cartItem) return;
       state.numItemsInCart += amount - cartItem.amount;
       state.cartTotal += Number(cartItem.price) * (amount - cartItem.amount);
+      cartItem.amount = amount;
       toast({ description: "Amount updated" });
       cartSlice.caseReducers.cacluateTotals(state);
     },
 
     cacluateTotals: (state) => {
       state.tax = 0.1 * state.cartTotal;
-      state.orderTotal = state.cartTotal + state.tax + state.shipping;
+      state.orderTotal = state.cartTotal + state.shipping + state.tax;
       localStorage.setItem("cart", JSON.stringify(state));
       toast({ description: "Item added to cart" });
     },
