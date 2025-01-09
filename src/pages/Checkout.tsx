@@ -2,11 +2,19 @@ import { CartTotal } from "@/components/cart";
 import CheckoutForm from "@/components/Checkout/CheckoutForm";
 import { SectionTitle } from "@/components/global";
 import { useAppSelector } from "@/hooks";
+import { toast } from "@/hooks/use-toast";
 import { ReduxStore } from "@/store";
-import { LoaderFunction } from "react-router-dom";
+import { LoaderFunction, redirect } from "react-router-dom";
 
 export const loader = (store: ReduxStore): LoaderFunction => {
-  return async (): Promise<null> => {
+  return async (): Promise<null | Response> => {
+    const user = store.getState().userState.user;
+    if (!user) {
+      toast({
+        description: "You can only access this page when your are logged in",
+      });
+      redirect("/login");
+    }
     return null;
   };
 };
