@@ -20,6 +20,7 @@ import { loader as LandingLoader } from "./pages/Landing";
 import { loader as ProductLoader } from "./pages/Products";
 import { loader as SingleProductLoader } from "./pages/SingleProduct";
 import { loader as CheckoutLoader } from "./pages/Checkout";
+import { loader as OrderLoader } from "./pages/Orders";
 
 import { action as registerAction } from "./pages/Register";
 import { action as loginAction } from "./pages/Login";
@@ -73,6 +74,7 @@ const router = createBrowserRouter([
         path: "orders",
         element: <Orders />,
         errorElement: <ErrorElement />,
+        loader: OrderLoader(store),
       },
     ],
   },
